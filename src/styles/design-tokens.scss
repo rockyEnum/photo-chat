@@ -1,0 +1,123 @@
+// 证件照小程序 - Design System Tokens
+// Based on UI-UX-Pro-Max: Trust & Authority Pattern
+// Primary: Medical/Official aesthetic with clean trustworthy colors
+
+// ========== Colors ==========
+// Primary Palette - Cyan (Trust, Medical, Clean)
+$primary-50: #ECFEFF;
+$primary-100: #CFFAFE;
+$primary-200: #A5F3FC;
+$primary-300: #67E8F9;
+$primary-400: #22D3EE;
+$primary-500: #0891B2;  // Primary
+$primary-600: #0E7490;
+$primary-700: #155E75;
+$primary-800: #164E63;  // Text
+$primary-900: #083344;
+
+// Accent - Fresh Green (Success, Action)
+$accent-50: #F0FDF4;
+$accent-100: #DCFCE7;
+$accent-400: #4ADE80;
+$accent-500: #22C55E;   // CTA
+$accent-600: #16A34A;
+
+// Neutral - Slate (Clean, Professional)
+$neutral-0: #FFFFFF;
+$neutral-50: #F8FAFC;
+$neutral-100: #F1F5F9;
+$neutral-200: #E2E8F0;
+$neutral-300: #CBD5E1;
+$neutral-400: #94A3B8;
+$neutral-500: #64748B;
+$neutral-600: #475569;
+$neutral-700: #334155;
+$neutral-800: #1E293B;
+$neutral-900: #0F172A;
+
+// Semantic Colors
+$success: $accent-500;
+$warning: #F59E0B;
+$error: #EF4444;
+$info: $primary-500;
+
+// Background Colors
+$bg-primary: $primary-50;
+$bg-card: $neutral-0;
+$bg-elevated: $neutral-50;
+
+// Text Colors
+$text-primary: $primary-800;
+$text-secondary: $neutral-600;
+$text-tertiary: $neutral-400;
+$text-inverse: $neutral-0;
+
+// Border Colors
+$border-light: $neutral-200;
+$border-default: $neutral-300;
+$border-focus: $primary-400;
+
+// ========== Typography ==========
+// Font Stack (System fonts for WeChat mini program)
+$font-display: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+$font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+
+// Font Sizes (rpx for mini program)
+$text-xs: 22rpx;
+$text-sm: 24rpx;
+$text-base: 28rpx;
+$text-lg: 32rpx;
+$text-xl: 36rpx;
+$text-2xl: 40rpx;
+$text-3xl: 48rpx;
+$text-4xl: 56rpx;
+
+// Font Weights
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+
+// Line Heights
+$leading-tight: 1.25;
+$leading-normal: 1.5;
+$leading-relaxed: 1.75;
+
+// ========== Spacing ==========
+$space-0: 0;
+$space-1: 8rpx;
+$space-2: 12rpx;
+$space-3: 16rpx;
+$space-4: 24rpx;
+$space-5: 32rpx;
+$space-6: 40rpx;
+$space-8: 48rpx;
+$space-10: 64rpx;
+$space-12: 80rpx;
+
+// ========== Border Radius ==========
+$radius-sm: 8rpx;
+$radius-md: 12rpx;
+$radius-lg: 16rpx;
+$radius-xl: 24rpx;
+$radius-full: 9999rpx;
+
+// ========== Shadows ==========
+$shadow-sm: 0 1rpx 2rpx rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4rpx 6rpx -1rpx rgba(0, 0, 0, 0.05), 0 2rpx 4rpx -2rpx rgba(0, 0, 0, 0.05);
+$shadow-lg: 0 10rpx 15rpx -3rpx rgba(0, 0, 0, 0.05), 0 4rpx 6rpx -4rpx rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20rpx 25rpx -5rpx rgba(0, 0, 0, 0.05), 0 8rpx 10rpx -6rpx rgba(0, 0, 0, 0.05);
+$shadow-glow: 0 0 20rpx rgba(8, 145, 178, 0.2);
+
+// ========== Transitions ==========
+$transition-fast: 150ms ease;
+$transition-normal: 200ms ease;
+$transition-slow: 300ms ease;
+
+// ========== Z-Index Scale ==========
+$z-base: 0;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-modal: 30;
+$z-popover: 40;
+$z-toast: 50;

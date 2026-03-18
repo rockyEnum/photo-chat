@@ -1,0 +1,84 @@
+/* 证件照小程序 - CSS 变量设计系统 */
+/* 替代 SCSS @import 方案，避免 Dart Sass 3.0 弃用警告 */
+
+:root {
+  /* Primary - Cyan */
+  --primary-50: #ECFEFF;
+  --primary-100: #CFFAFE;
+  --primary-200: #A5F3FC;
+  --primary-300: #67E8F9;
+  --primary-400: #22D3EE;
+  --primary-500: #0891B2;
+  --primary-600: #0E7490;
+  --primary-700: #155E75;
+  --primary-800: #164E63;
+  --primary-900: #083344;
+
+  /* Accent - Green */
+  --accent-50: #F0FDF4;
+  --accent-100: #DCFCE7;
+  --accent-400: #4ADE80;
+  --accent-500: #22C55E;
+  --accent-600: #16A34A;
+
+  /* Neutral - Slate */
+  --neutral-0: #FFFFFF;
+  --neutral-50: #F8FAFC;
+  --neutral-100: #F1F5F9;
+  --neutral-200: #E2E8F0;
+  --neutral-300: #CBD5E1;
+  --neutral-400: #94A3B8;
+  --neutral-500: #64748B;
+  --neutral-600: #475569;
+  --neutral-700: #334155;
+  --neutral-800: #1E293B;
+  --neutral-900: #0F172A;
+
+  /* Semantic */
+  --success: #22C55E;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #0891B2;
+
+  /* Background */
+  --bg-primary: #ECFEFF;
+  --bg-card: #FFFFFF;
+  --bg-elevated: #F8FAFC;
+
+  /* Text */
+  --text-primary: #164E63;
+  --text-secondary: #475569;
+  --text-tertiary: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* Border */
+  --border-light: #E2E8F0;
+  --border-default: #CBD5E1;
+  --border-focus: #22D3EE;
+
+  /* Spacing */
+  --space-0: 0;
+  --space-1: 8rpx;
+  --space-2: 12rpx;
+  --space-3: 16rpx;
+  --space-4: 24rpx;
+  --space-5: 32rpx;
+  --space-6: 40rpx;
+  --space-8: 48rpx;
+  --space-10: 64rpx;
+  --space-12: 80rpx;
+
+  /* Border Radius */
+  --radius-sm: 8rpx;
+  --radius-md: 12rpx;
+  --radius-lg: 16rpx;
+  --radius-xl: 24rpx;
+  --radius-full: 9999rpx;
+
+  /* Shadows */
+  --shadow-sm: 0 1rpx 2rpx rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4rpx 6rpx -1rpx rgba(0, 0, 0, 0.05), 0 2rpx 4rpx -2rpx rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10rpx 15rpx -3rpx rgba(0, 0, 0, 0.05), 0 4rpx 6rpx -4rpx rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20rpx 25rpx -5rpx rgba(0, 0, 0, 0.05), 0 8rpx 10rpx -6rpx rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 20rpx rgba(8, 145, 178, 0.2);
+}

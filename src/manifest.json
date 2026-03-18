@@ -1,0 +1,58 @@
+{
+  "name": "证件照小程序",
+  "appid": "wxacbae8ae142a90fb",
+  "description": "智能证件照制作工具",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "splashscreen": {
+      "alwaysShowBeforeRender": true,
+      "waiting": true,
+      "autoclose": true,
+      "delay": 0
+    },
+    "modules": {},
+    "distribute": {
+      "android": {
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.CAMERA\" />",
+          "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />"
+        ]
+      },
+      "ios": {},
+      "sdkConfigs": {}
+    }
+  },
+  "quickapp": {},
+  "mp-weixin": {
+    "appid": "wxacbae8ae142a90fb",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true,
+    "lazyCodeLoading": "requiredComponents",
+    "permission": {
+      "scope.camera": {
+        "desc": "用于拍摄证件照"
+      },
+      "scope.writePhotosAlbum": {
+        "desc": "用于保存证件照到相册"
+      }
+    }
+  },
+  "mp-alipay": {
+    "usingComponents": true
+  },
+  "mp-baidu": {
+    "usingComponents": true
+  },
+  "mp-toutiao": {
+    "usingComponents": true
+  },
+  "uniStatistics": {
+    "enable": false
+  },
+  "vueVersion": "3"
+}
