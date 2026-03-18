@@ -224,60 +224,70 @@ const goHistory = () => {
 .size-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20rpx;
+  gap: 24rpx;
+  padding: 8rpx 4rpx;
 }
 
 .size-card {
-  background: var(--bg-card);
-  border-radius: 24rpx;
-  padding: 28rpx 16rpx;
+  background: #FFFFFF;
+  border-radius: 20rpx;
+  padding: 32rpx 16rpx;
   text-align: center;
   position: relative;
   cursor: pointer;
-  border: 2rpx solid transparent;
-  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+  border: 3rpx solid #E2E8F0;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
+  min-height: 160rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .size-card.card-selected {
-  border-color: var(--primary-500);
-  background: linear-gradient(135deg, #ffffff 0%, #ecfeff 100%);
-  box-shadow: 0 8rpx 24rpx rgba(8, 145, 178, 0.15);
+  border: 3rpx solid #0891B2;
+  background: #FFFFFF;
+  box-shadow: 0 4rpx 16rpx rgba(8, 145, 178, 0.2);
 }
 
 .size-card:active {
-  transform: scale(0.97);
+  transform: scale(0.96);
 }
 
 .size-card .size-name {
-  font-size: 30rpx;
-  font-weight: 600;
-  color: #164E63;
-  margin-bottom: 12rpx;
+  font-size: 32rpx;
+  font-weight: 700;
+  color: #1E293B;
+  margin-bottom: 16rpx;
+  line-height: 1.2;
 }
 
 .size-card .size-mm {
-  font-size: 22rpx;
-  color: #475569;
-  margin-bottom: 6rpx;
+  font-size: 24rpx;
+  color: #64748B;
+  margin-bottom: 8rpx;
+  line-height: 1.3;
 }
 
 .size-card .size-px {
-  font-size: 20rpx;
+  font-size: 22rpx;
   color: #94A3B8;
+  line-height: 1.3;
 }
 
 .size-card .size-tag {
   position: absolute;
-  top: -10rpx;
-  right: -6rpx;
+  top: -12rpx;
+  right: -8rpx;
   font-size: 18rpx;
-  padding: 4rpx 14rpx;
-  background: linear-gradient(135deg, var(--accent-500) 0%, var(--accent-600) 100%);
-  color: white;
+  padding: 6rpx 16rpx;
+  background: #22C55E;
+  color: #FFFFFF;
   border-radius: 9999rpx;
   font-weight: 600;
-  box-shadow: 0 2rpx 8rpx rgba(34, 197, 94, 0.3);
+  box-shadow: 0 2rpx 8rpx rgba(34, 197, 94, 0.4);
+  z-index: 10;
 }
 
 .recent-thumb {
