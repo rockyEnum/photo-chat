@@ -35,7 +35,7 @@
     <!-- Action Buttons -->
     <view class="action-section" v-if="!tempImage">
       <view class="action-row">
-        <view class="action-btn btn-camera" @click="takePhoto">
+        <view class="action-btn btn-camera" @click="openCamera">
           <view class="btn-icon-wrapper">
             <text class="btn-icon">📷</text>
           </view>
@@ -84,6 +84,30 @@
         下一步：编辑照片
       </button>
     </view>
+
+    <!-- Custom Camera Fullscreen Overlay -->
+    <view v-if="isCameraOpen" class="camera-fullscreen">
+      <camera
+        :device-position="devicePosition"
+        flash="off"
+        class="camera-view"
+        @error="onCameraError"
+      >
+        <cover-view class="camera-overlay">
+          <cover-view class="face-frame"></cover-view>
+          <cover-view class="camera-tips">请将人脸对准虚线框内</cover-view>
+        </cover-view>
+
+        <cover-view class="camera-bottom-bar safe-area-bottom">
+          <cover-view class="camera-btn-text" @click="closeCamera">取消</cover-view>
+          <cover-view class="capture-btn-outer" @click="doTakePhoto">
+            <cover-view class="capture-btn-inner"></cover-view>
+          </cover-view>
+          <cover-view class="camera-btn-text" @click="switchCamera">翻转</cover-view>
+        </cover-view>
+      </camera>
+    </view>
+
   </view>
 </template>
 
@@ -94,6 +118,8 @@ import { checkCameraAuth, checkAlbumAuth } from '@/utils/auth';
 
 const currentSize = ref<any>({});
 const tempImage = ref('');
+const isCameraOpen = ref(false);
+const devicePosition = ref('front');
 
 onLoad((options) => {
   if (options?.size) {
@@ -101,24 +127,44 @@ onLoad((options) => {
   }
 });
 
-// 拍照
-const takePhoto = async () => {
+// 打开自定义相机
+const openCamera = async () => {
   const hasAuth = await checkCameraAuth();
   if (!hasAuth) return;
+  isCameraOpen.value = true;
+};
 
-  uni.chooseMedia({
-    count: 1,
-    mediaType: ['image'],
-    sourceType: ['camera'],
-    camera: 'front',
-    success: (res: any) => {
-      const tempFilePath = res.tempFiles[0].tempFilePath;
-      processImage(tempFilePath);
+// 关闭相机
+const closeCamera = () => {
+  isCameraOpen.value = false;
+};
+
+// 切换前后摄像头
+const switchCamera = () => {
+  devicePosition.value = devicePosition.value === 'front' ? 'back' : 'front';
+};
+
+// 执行拍照
+const doTakePhoto = () => {
+  const ctx = uni.createCameraContext();
+  ctx.takePhoto({
+    quality: 'high',
+    success: (res) => {
+      isCameraOpen.value = false;
+      processImage(res.tempImagePath);
     },
     fail: (err) => {
       console.error('拍照失败:', err);
+      uni.showToast({ title: '拍照失败', icon: 'none' });
     }
   });
+};
+
+// 相机错误回调
+const onCameraError = (e: any) => {
+  console.error('相机启动失败:', e);
+  uni.showToast({ title: '无法访问相机，请检查权限', icon: 'none' });
+  isCameraOpen.value = false;
 };
 
 // 从相册选择
@@ -445,4 +491,89 @@ const goToEdit = () => {
 .btn-primary:active {
   background: linear-gradient(135deg, #0E7490 0%, #0891B2 100%) !important;
 }
+
+/* Custom Camera Styles */
+.camera-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  background: #000;
+}
+
+.camera-view {
+  width: 100vw;
+  height: 100vh;
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 240rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.face-frame {
+  width: 440rpx;
+  height: 580rpx;
+  border: 6rpx solid rgba(255, 255, 255, 0.8);
+  border-radius: 220rpx; /* Creates a capsule shape */
+  box-sizing: border-box;
+}
+
+.camera-tips {
+  margin-top: 60rpx;
+  color: #fff;
+  font-size: 28rpx;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 16rpx 40rpx;
+  border-radius: 999rpx;
+}
+
+.camera-bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 240rpx;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom);
+  pointer-events: auto;
+}
+
+.camera-btn-text {
+  color: #fff;
+  font-size: 32rpx;
+  padding: 20rpx 40rpx;
+}
+
+.capture-btn-outer {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.capture-btn-inner {
+  width: 110rpx;
+  height: 110rpx;
+  border-radius: 50%;
+  background: #fff;
+}
 </style>
+
