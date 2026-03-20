@@ -28,31 +28,6 @@ export const getImageInfo = (src: string): Promise<UniApp.GetImageInfoSuccessDat
 };
 
 /**
- * AI抠图 - 使用腾讯云人像分割API
- * 注：需要配置腾讯云API密钥
- */
-export const removeBackground = async (imagePath: string): Promise<string> => {
-  // 这里应该调用腾讯云AI人像分割API
-  // 由于需要服务端支持，这里返回原图作为降级方案
-
-  // 实际实现流程：
-  // 1. 上传图片到服务器
-  // 2. 服务器调用腾讯云API
-  // 3. 返回分割后的图片URL
-
-  return new Promise((resolve) => {
-    // 模拟AI处理延迟
-    uni.showLoading({ title: 'AI处理中...' });
-
-    setTimeout(() => {
-      uni.hideLoading();
-      // 返回原图（实际应该是AI分割后的图片）
-      resolve(imagePath);
-    }, 1500);
-  });
-};
-
-/**
  * 图片合成 - 将人像与背景色合成
  */
 export const compositeImage = async (
@@ -489,7 +464,6 @@ export const applyFaceBeauty = (
 export default {
   compressImage,
   getImageInfo,
-  removeBackground,
   compositeImage,
   generateLayout,
   cropImage,

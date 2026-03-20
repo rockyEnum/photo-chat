@@ -143,10 +143,19 @@ export const TENCENT_AI_CONFIG = {
   segmentUrl: 'https://iai.tencentcloudapi.com/?Action=SegmentPortraitPic'
 };
 
+// 百度云API配置
+export const BAIDU_AI_CONFIG = {
+  apiKey: 'DOXPFIbVfmxHQtoabylMOR1v',
+  secretKey: 'QSwMsMLVFiWvN0KLlov0pWALZRvZO7sy',
+  tokenUrl: 'https://aip.baidubce.com/oauth/2.0/token',
+  segmentUrl: 'https://aip.baidubce.com/rest/2.0/image-classify/v1/body_seg'
+};
+
 // 默认导出
 export default {
   PHOTO_SIZES,
   BACKGROUND_COLORS,
   LAYOUT_CONFIG,
-  TENCENT_AI_CONFIG
+  TENCENT_AI_CONFIG,
+  BAIDU_AI_CONFIG
 };

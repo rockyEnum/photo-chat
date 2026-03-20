@@ -208,6 +208,8 @@
 import { ref } from 'vue';
 import { onLoad, onReady } from '@dcloudio/uni-app';
 import { BACKGROUND_COLORS } from '@/utils/constants';
+import { segmentPortrait } from '@/utils/baiduAI';
+import { applyBeauty } from '@/utils/imageProcessor';
 
 const bgColors = ref(BACKGROUND_COLORS);
 const selectedColor = ref('#FFFFFF');
@@ -278,15 +280,26 @@ const initCanvas = () => {
 const loadAndProcessImage = async () => {
   if (!originalImage.value || !canvasCtx) return;
   processing.value = true;
+  processingText.value = 'AI智能抠图中...';
 
   try {
-    const imageInfo = await getImageInfo(originalImage.value);
+    // 调用百度云 API 进行人像分割（压缩和 base64 处理都在 baiduAI 模块内完成）
+    const mattedImagePath = await segmentPortrait(originalImage.value);
+    
+    // 将抠像结果作为画布新的原图素材
+    originalImage.value = mattedImagePath;
+
+    // 渲染带有透明图层的图片并显示后续的背景
+    const imageInfo = await getImageInfo(mattedImagePath);
     await drawPhoto(imageInfo);
+    
     processing.value = false;
-  } catch (error) {
+    processingText.value = '处理中...';
+  } catch (error: any) {
     console.error('Image processing failed:', error);
     processing.value = false;
-    uni.showToast({ title: '图片处理失败', icon: 'none' });
+    processingText.value = '处理中...';
+    uni.showToast({ title: error.message || '抠图失败', icon: 'none', duration: 3000 });
   }
 };
 
@@ -424,7 +437,6 @@ const generatePhoto = async () => {
     // Apply beauty if enabled
     if (beauty.value.smooth > 0 || beauty.value.whiten > 0 || beauty.value.ruddy > 0) {
       processingText.value = '美颜处理中...';
-      const { applyBeauty } = await import('@/utils/imageProcessor');
       tempFilePath = await applyBeauty(tempFilePath, {
         smooth: beauty.value.smooth,
         whiten: beauty.value.whiten,
