@@ -119,28 +119,43 @@
     <!-- Save Modal -->
     <view class="modal-overlay" v-if="showSaveModal" @click="closeModal">
       <view class="modal-content" @click.stop>
+        <view class="modal-drag-handle"></view>
+
         <view class="modal-header">
-          <text class="modal-title">选择保存方式</text>
-          <text class="modal-close" @click="closeModal">✕</text>
+          <view class="modal-title-wrap">
+            <text class="modal-title">选择保存方式</text>
+            <text class="modal-subtitle">选择您需要的保存格式</text>
+          </view>
+          <view class="modal-close" @click="closeModal">
+            <text class="modal-close-icon">✕</text>
+          </view>
         </view>
 
         <view class="modal-body">
-          <view class="save-option" @click="saveSingle">
-            <view class="option-icon">🖼️</view>
+          <view class="save-option save-option-single" @click="saveSingle">
+            <view class="option-icon-wrap option-icon-single">
+              <text class="option-icon">🖼️</text>
+            </view>
             <view class="option-info">
               <text class="option-title">保存单张</text>
               <text class="option-desc">电子版证件照，适合在线使用</text>
             </view>
-            <text class="option-arrow">›</text>
+            <view class="option-arrow-wrap">
+              <text class="option-arrow">›</text>
+            </view>
           </view>
 
-          <view class="save-option" @click="saveLayout" v-if="canLayout">
-            <view class="option-icon">🖨️</view>
+          <view class="save-option save-option-layout" @click="saveLayout" v-if="canLayout">
+            <view class="option-icon-wrap option-icon-layout">
+              <text class="option-icon">🖨️</text>
+            </view>
             <view class="option-info">
               <text class="option-title">保存排版</text>
               <text class="option-desc">6寸相纸排版，适合打印冲印</text>
             </view>
-            <text class="option-arrow">›</text>
+            <view class="option-arrow-wrap">
+              <text class="option-arrow">›</text>
+            </view>
           </view>
         </view>
       </view>
@@ -628,41 +643,68 @@ const formatTime = (date: Date) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(15, 23, 42, 0.5);
+  background: rgba(15, 23, 42, 0.6);
   display: flex;
   align-items: flex-end;
   justify-content: center;
   z-index: 1000;
+  backdrop-filter: blur(4rpx);
 }
 
 .modal-overlay .modal-content {
   width: 100%;
-  background: var(--bg-card);
-  border-radius: 28rpx 28rpx 0 0;
-  padding: 30rpx;
-  animation: slideUp 0.3s ease;
+  background: linear-gradient(180deg, #f8faff 0%, var(--bg-card) 60rpx);
+  border-radius: 36rpx 36rpx 0 0;
+  padding: 16rpx 30rpx 0;
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 -8rpx 40rpx rgba(15, 23, 42, 0.12);
 }
 
 @keyframes slideUp {
   from {
     transform: translateY(100%);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
+}
+
+/* 拖拽把手 */
+.modal-drag-handle {
+  width: 64rpx;
+  height: 8rpx;
+  background: var(--neutral-200);
+  border-radius: 9999rpx;
+  margin: 0 auto 28rpx;
 }
 
 .modal-overlay .modal-content .modal-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30rpx;
+  align-items: flex-start;
+  margin-bottom: 32rpx;
+  padding-bottom: 28rpx;
+  border-bottom: 2rpx solid var(--border-light);
+}
+
+.modal-overlay .modal-content .modal-header .modal-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
 }
 
 .modal-overlay .modal-content .modal-header .modal-title {
-  font-size: 32rpx;
-  font-weight: 600;
+  font-size: 34rpx;
+  font-weight: 700;
   color: var(--text-primary);
+}
+
+.modal-overlay .modal-content .modal-header .modal-subtitle {
+  font-size: 22rpx;
+  color: var(--text-tertiary);
 }
 
 .modal-overlay .modal-content .modal-header .modal-close {
@@ -671,35 +713,83 @@ const formatTime = (date: Date) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 32rpx;
-  color: var(--text-tertiary);
   background: var(--neutral-100);
   border-radius: 9999rpx;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modal-overlay .modal-content .modal-header .modal-close .modal-close-icon {
+  font-size: 26rpx;
+  color: var(--text-tertiary);
 }
 
 .modal-overlay .modal-content .modal-header .modal-close:active {
   background: var(--neutral-200);
 }
 
+/* 选项通用 */
 .modal-overlay .modal-content .save-option {
   display: flex;
   align-items: center;
-  padding: 30rpx;
-  background: var(--bg-elevated);
-  border-radius: 20rpx;
-  margin-bottom: 24rpx;
+  padding: 28rpx;
+  border-radius: 24rpx;
+  margin-bottom: 20rpx;
   cursor: pointer;
   transition: all 0.15s ease;
+  border: 2rpx solid transparent;
 }
 
-.modal-overlay .modal-content .save-option:active {
+.modal-overlay .modal-content .save-option:last-child {
+  margin-bottom: 0;
+}
+
+/* 保存单张：蓝色主题 */
+.modal-overlay .modal-content .save-option-single {
+  background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+  border-color: #bfdbfe;
+}
+
+.modal-overlay .modal-content .save-option-single:active {
   transform: scale(0.98);
-  background: var(--primary-50);
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
 }
 
-.modal-overlay .modal-content .save-option .option-icon {
-  font-size: 48rpx;
+/* 保存排版：绿色主题 */
+.modal-overlay .modal-content .save-option-layout {
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-color: #bbf7d0;
+}
+
+.modal-overlay .modal-content .save-option-layout:active {
+  transform: scale(0.98);
+  background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+}
+
+/* 图标容器 */
+.option-icon-wrap {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 24rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-right: 24rpx;
+  flex-shrink: 0;
+}
+
+.option-icon-single {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  box-shadow: 0 8rpx 20rpx rgba(59, 130, 246, 0.3);
+}
+
+.option-icon-layout {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  box-shadow: 0 8rpx 20rpx rgba(34, 197, 94, 0.3);
+}
+
+.option-icon-wrap .option-icon {
+  font-size: 44rpx;
 }
 
 .modal-overlay .modal-content .save-option .option-info {
@@ -717,11 +807,24 @@ const formatTime = (date: Date) => {
 .modal-overlay .modal-content .save-option .option-info .option-desc {
   display: block;
   font-size: 22rpx;
-  color: var(--text-tertiary);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* 箭头容器 */
+.option-arrow-wrap {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 9999rpx;
 }
 
 .modal-overlay .modal-content .save-option .option-arrow {
-  font-size: 36rpx;
-  color: var(--text-tertiary);
+  font-size: 32rpx;
+  color: var(--text-secondary);
+  line-height: 1;
 }
 </style>
