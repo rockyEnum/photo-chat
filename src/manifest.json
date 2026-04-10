@@ -33,14 +33,8 @@
     },
     "usingComponents": true,
     "lazyCodeLoading": "requiredComponents",
-    "permission": {
-      "scope.camera": {
-        "desc": "用于拍摄证件照"
-      },
-      "scope.writePhotosAlbum": {
-        "desc": "用于保存证件照到相册"
-      }
-    }
+    "__usePrivacyCheck__": true
+
   },
   "mp-alipay": {
     "usingComponents": true
